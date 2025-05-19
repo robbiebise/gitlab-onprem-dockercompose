@@ -1,0 +1,38 @@
+services:
+# default root password is in etc/gitlab/initial_root_password
+# make sure to unprotect the sonar token so it can be used with other branches
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: always
+    ports:
+      - '80:80'
+      - '22:22'
+    volumes:
+      - './gitlab-self-hosted/config:/etc/gitlab'
+      - './gitlab-self-hosted/logs:/var/log/gitlab'
+      - './gitlab-self-hosted/data:/var/opt/gitlab'
+    networks:
+      - gitlab-network
+    # Add hostname mapping for internal services
+    hostname: gitlab
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # gitlab-runner register (register as group runner and executor "shell")
+  gitlab-runner:
+    build:
+      context: ./gitlab-runner
+      dockerfile: Dockerfile
+    container_name: gitlab-runner
+    restart: always
+    platform: linux/x86_64
+    volumes:
+      - './gitlab-runner/config/gitlab-runner:/etc/gitlab-runner'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    environment:
+      - RUNNER_NAME=gitlab-runner
+      - CI_SERVER_URL=http://gitlab:80/
+      - REGISTRATION_TOKEN=${DOCKER_GITLAB_RUNNER_REGISTRATION_TOKEN}
+    networks:
+      - gitlab-network

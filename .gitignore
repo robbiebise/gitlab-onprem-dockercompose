@@ -1,0 +1,42 @@
+# Docker Compose
+docker-compose.override.yml
+
+# Configuration directories
+/config/
+/configs/
+/configuration/
+
+# Environment files
+.env
+.env.*
+
+# Docker volumes
+/data/
+/volumes/
+
+# Logs
+/logs/
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+.project
+.settings/
+
+# Dependencies
+/node_modules/
+/vendor/
+
+# Build artifacts
+/build/
+/dist/
