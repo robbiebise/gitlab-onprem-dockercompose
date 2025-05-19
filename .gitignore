@@ -2,17 +2,17 @@
 docker-compose.override.yml
 
 # Configuration directories
-/config/
-/configs/
-/configuration/
+*/config/
+*/configs/
+*/configuration/
 
 # Environment files
 .env
 .env.*
 
 # Docker volumes
-/data/
-/volumes/
+*/data/
+*/volumes/
 
 # Logs
 /logs/
