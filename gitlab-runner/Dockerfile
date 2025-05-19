@@ -30,7 +30,7 @@ ENV SONAR_SCANNER_SKIP_JRE_PROVISIONING=true
 ENV SONAR_SCANNER_SKIP_NODE_PROVISIONING=true
 
 # Add a custom entrypoint script to configure Git
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# COPY entrypoint.sh /entrypoint.sh
+# RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+# ENTRYPOINT ["/entrypoint.sh"]

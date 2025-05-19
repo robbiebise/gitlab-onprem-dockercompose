@@ -1,6 +1,7 @@
 services:
 # default root password is in etc/gitlab/initial_root_password
-# make sure to unprotect the sonar token so it can be used with other branches
+#   if file is missing run gitlab-rake "gitlab:password:reset[root]" to reset root password
+# When setting up the scans - make sure to unprotect the sonar token so it can be used with other branches
   gitlab:
     image: gitlab/gitlab-ce:latest
     container_name: gitlab
@@ -36,3 +37,8 @@ services:
       - REGISTRATION_TOKEN=${DOCKER_GITLAB_RUNNER_REGISTRATION_TOKEN}
     networks:
       - gitlab-network
+
+networks:
+  gitlab-network:
+    name: gitlab_default
+    driver: bridge
